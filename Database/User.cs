@@ -1,10 +1,11 @@
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.ComponentModel.DataAnnotations;
+using AspApi.Controllers;
 
 namespace AspApi.Database;
 
-public record class User {
+public record class User : IHasKey<Guid> {
 
     // TODO FIX: Почему этот метод тут вообще
     public static string HashString(string password,byte[] salt)
@@ -37,7 +38,7 @@ public record class User {
 
     public byte[] Salt { get; set; } = new byte[0];
 
-    public string FirstName { get; set; } = "";
+    public string? FirstName { get; set; } = null;
 
-    public string LastName { get; set; } = "";
+    public string? LastName { get; set; } = null;
 }

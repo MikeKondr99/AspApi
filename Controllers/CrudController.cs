@@ -8,8 +8,8 @@ namespace AspApi.Controllers;
 /// Api для локальной sqlite базы данных
 /// </summary>
 [ApiController]
-[Route("db")]
-public class DbController : ControllerBase 
+[Route("rest")]
+public class DbController : Controller
 {
     private readonly SqliteDb _sqliteDb;
 
@@ -26,16 +26,6 @@ public class DbController : ControllerBase
         return user is not null ? Ok(user) : NotFound("Пользователь не найден");
     }
 
-    [HttpGet()]
-    public async Task<ActionResult<IEnumerable<User>>> GetWithQueryAsync([FromQuery] string? firstName,[FromQuery] string? lastName)
-    {
-        IQueryable<User> query = _sqliteDb.Users;
-        if(firstName is not null)
-            query = query.Where(u => u.FirstName.Contains(firstName));
-        if(lastName is not null)
-            query = query.Where(u => u.LastName.Contains(lastName));
-        return await query.ToListAsync();
-    }
 
     [HttpPut()]
     public async Task<ActionResult<User>> UpdateAsync([FromBody] User value)
