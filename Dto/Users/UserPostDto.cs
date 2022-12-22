@@ -3,29 +3,21 @@ using AspApi.Database;
 namespace AspApi.Dto.Users;
 
 
-public class UserPostDto : IPostDto<User>
+public class UserPostDto : PostDto<User>
 {
     public string Username { get; set; } = "";
-
     public string Password { get; set; } = ""; // for debug
+    public string? FirstName { get; set; } = null;
+    public string? LastName { get; set; } = null;
 
-    public string? FirstName { get; set; } = "";
-
-    public string? LastName { get; set; } = "";
-
-    public User Create()
+    public override User Create()
     {
+        var user = base.Create();
+        //
         var salt = User.GenSalt();
         var hash = User.HashString(this.Password,salt);
-        return new User
-        {
-            Id  = Guid.NewGuid(),
-            Username  = this.Username,
-            Password  = this.Password, // for debug
-            PasswordHash  = hash,
-            Salt  = salt,
-            FirstName  = this.FirstName,
-            LastName  = this.LastName,
-        };
+        user.Salt = User.GenSalt();
+        user.PasswordHash = User.HashString(user.Password,user.Salt);
+        return user;
     }
 }

@@ -1,10 +1,15 @@
 
+using FluentValidation;
+using AspApi.Validators;
 using Microsoft.AspNetCore.OData.Extensions;
 using Microsoft.AspNetCore.OData;
 using Microsoft.EntityFrameworkCore;
 using AspApi.Database;
 using AspApi;
-using Microsoft.AspNetCore.OData.Routing.Conventions;
+
+//? Dapr
+//?  Microservices
+//* Odata
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,11 +22,9 @@ builder.Services.AddControllers()
         options.AddRouteComponents("odata",ODataEdmModel.Get());
     });
 builder.Services.AddSwaggerGen();
+builder.Services.AddValidatorsFromAssemblyContaining<UserValidator>();
 
 
-// Dapr
-// Microservices
-// Odata
 
 // ! build
 var app = builder.Build();

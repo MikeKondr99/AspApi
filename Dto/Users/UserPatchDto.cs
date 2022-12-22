@@ -1,17 +1,12 @@
 using AspApi.Database;
+using Microsoft.AspNetCore.OData.Deltas;
 
 namespace AspApi.Dto.Users;
 
-public class UserPatchDto : IPatchDto<User>
+public class UserPatchDto : PatchDto<User>
 {
-    public string? FirstName { get; set; } = "";
+    public string? FirstName { get; set; } = null;
+    public string? LastName { get; set; } = null;
 
-    public string? LastName { get; set; } = "";
-
-    public User Patch(User user)
-    {
-        user.FirstName = FirstName ?? user.FirstName;
-        user.LastName = LastName ?? user.LastName;
-        return user;
-    }
 }
+
