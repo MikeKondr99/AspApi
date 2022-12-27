@@ -1,28 +1,12 @@
 using FluentValidation;
-using AspApi.Database;
-using System.Text.RegularExpressions;
+using AspApi.Dto.Users;
 
 namespace AspApi.Validators;
 
-
-public class UserValidator : AbstractValidator<User>
+public class UserPatchValidator : AbstractValidator<UserPatchDto>
 {
-    static Regex passwordRgx = new Regex("^[a-zA-Z0-9]*$",RegexOptions.Compiled);
-    public UserValidator()
+    public UserPatchValidator()
     {
-
-        RuleFor(u=> u.Id)
-            .NotNull();
-
-        RuleFor(u => u.Username)
-            .NotNull()
-            .MinimumLength(8);
-
-        RuleFor(u => u.Password)
-            .NotNull()
-            .MinimumLength(8)
-            .Matches(passwordRgx);
-
         RuleFor(u => u.FirstName)
             .MinimumLength(3)
             .WithMessage("Имя должно быть больше 3ех символов")

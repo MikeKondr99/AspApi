@@ -40,7 +40,7 @@ public abstract class DefaultRepositoryController<T,TKey> : ODataController  whe
     public virtual async Task<IActionResult> DefaultPostAsync(IPostDto<T> postDto) 
     {
         if(!ModelState.IsValid)
-            BadRequest();
+            return BadRequest(ModelState.Values.SelectMany(v => v.Errors));
         var user = postDto.Create();
         await Table.AddAsync(user);
         await Context.SaveChangesAsync();
@@ -50,7 +50,7 @@ public abstract class DefaultRepositoryController<T,TKey> : ODataController  whe
     public virtual async Task<IActionResult> DefaultPatchAsync(TKey key, IPatchDto<T> patchDto)
     {
         if(!ModelState.IsValid)
-            BadRequest();
+            return BadRequest();
         var user = await Table.FindAsync(key);
         if(user is null) 
             return NotFound();

@@ -10,6 +10,7 @@ public static class ODataEdmModel
         var builder = new ODataConventionModelBuilder();
 
         builder.EntitySet<User>("Users");
+        builder.EntitySet<Project>("Projects");
 
         return builder.GetEdmModel();
 

@@ -1,6 +1,6 @@
 using AgileObjects.AgileMapper;
 
-namespace AspApi.Dto.Users;
+namespace AspApi.Dto;
 
 public class PostDto<T> : IPostDto<T>
 {

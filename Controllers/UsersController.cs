@@ -25,15 +25,17 @@ public class UsersController : DefaultRepositoryController<User,Guid>
         DefaultGet(key);
 
     [EnableQuery]   
+    [HttpPost]
     public async Task<IActionResult> PostAsync([FromBody] UserPostDto postDto) =>
         await DefaultPostAsync(postDto);
 
     [EnableQuery]   
+    [HttpPatch]
     public async Task<IActionResult> PatchAsync(Guid key,[FromBody] UserPatchDto postDto) =>
         await DefaultPatchAsync(key,postDto);
 
     [EnableQuery]   
+    [HttpDelete]
     public async Task<IActionResult> DeleteAsync(Guid key) =>
         await DefaultDeleteAsync(key);
 }
-

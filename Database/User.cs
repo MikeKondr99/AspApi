@@ -42,3 +42,4 @@ public record class User : IHasKey<Guid> {
 
     public string? LastName { get; set; } = null;
 }
+
