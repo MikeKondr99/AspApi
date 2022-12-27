@@ -14,8 +14,7 @@ namespace ODataCodegen.Controllers;
 
 public class UsersController : DefaultRepositoryController<User,Guid>
 {
-    public UsersController(SqliteDb sqliteDb,IValidator<User> user,IValidator<IPostDto<User>> post,IValidator<IPatchDto<User>> patch) 
-    : base(sqliteDb,sqliteDb.Users,user,post,patch) { }
+    public UsersController(SqliteDb sqliteDb) : base(sqliteDb,sqliteDb.Users) { }
 
     [EnableQuery]
     public IQueryable<User> Get() =>

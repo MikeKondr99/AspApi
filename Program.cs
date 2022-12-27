@@ -1,4 +1,5 @@
 
+using System.Collections.Immutable;
 using FluentValidation;
 using AspApi.Validators;
 using Microsoft.AspNetCore.OData.Extensions;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.OData;
 using Microsoft.EntityFrameworkCore;
 using AspApi.Database;
 using AspApi;
+using FluentValidation.AspNetCore;
 
 //? Dapr
 //?  Microservices
@@ -21,8 +23,10 @@ builder.Services.AddControllers()
         options.Select().Filter().OrderBy().Count().SetMaxTop(null);
         options.AddRouteComponents("odata",ODataEdmModel.Get());
     });
-builder.Services.AddSwaggerGen();
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddFluentValidationClientsideAdapters();
 builder.Services.AddValidatorsFromAssemblyContaining<UserValidator>();
+builder.Services.AddSwaggerGen();
 
 
 
