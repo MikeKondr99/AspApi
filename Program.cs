@@ -28,8 +28,6 @@ builder.Services.AddFluentValidationClientsideAdapters();
 builder.Services.AddValidatorsFromAssemblyContaining<UserValidator>();
 builder.Services.AddSwaggerGen();
 
-
-
 // ! build
 var app = builder.Build();
 
