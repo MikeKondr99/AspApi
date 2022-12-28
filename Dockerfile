@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 WORKDIR /app
-ENV ASPNETCORE_URLS=http://*:5000
-EXPOSE 5000
+ENV ASPNETCORE_URLS=http://*:80
+EXPOSE 80
 
 
 # Creates a non-root user with an explicit UID and adds permission to access the /app folder
@@ -23,4 +23,4 @@ RUN dotnet publish "AspApi.csproj" -c Release -o /app/publish /p:UseAppHost=fals
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "AspApi.dll" "--urls http://localhost:5000"]
+ENTRYPOINT ["dotnet", "AspApi.dll"]
