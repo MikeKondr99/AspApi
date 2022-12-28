@@ -23,4 +23,4 @@ RUN dotnet publish "AspApi.csproj" -c Release -o /app/publish /p:UseAppHost=fals
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "AspApi.dll"]
+ENTRYPOINT ["dotnet", "AspApi.dll" "--urls http://localhost:5000"]
