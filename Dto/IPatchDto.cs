@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.IO.MemoryMappedFiles;
 using System.Collections;
 using Microsoft.AspNetCore.OData.Deltas;
@@ -9,3 +10,13 @@ public interface IPatchDto<T> where T : class
 {
     public T Patch(T entity);
 }
+
+
+
+
+
+
+
+
+
+

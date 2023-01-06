@@ -5,7 +5,19 @@ using AspApi.Controllers;
 
 namespace AspApi.Database;
 
-public record class User : IHasKey<Guid> {
+public interface IHaveLogin
+{
+    string Username { get; set; } 
+    string Password { get; set; }
+}
+
+public interface  IHaveNames
+{
+    public string? FirstName { get; set; }
+    public string? LastName { get; set; }
+}
+
+public record class User : IHasKey<Guid>, IHaveLogin, IHaveNames {
 
     // TODO FIX: Почему этот метод тут вообще
     public static string HashString(string password,byte[] salt)
@@ -29,17 +41,11 @@ public record class User : IHasKey<Guid> {
 
     [Key]
     public Guid Id { get; set; } = Guid.Empty;
-
     public string Username { get; set; } = "";
-
     public string Password { get; set; } = ""; // for debug
-
     public string PasswordHash { get; set; } = "";
-
     public byte[] Salt { get; set; } = new byte[0];
-
     public string? FirstName { get; set; } = null;
-
     public string? LastName { get; set; } = null;
 }
 

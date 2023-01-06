@@ -3,7 +3,7 @@ using AspApi.Database;
 namespace AspApi.Dto.Users;
 
 
-public class UserPostDto : PostDto<User>
+public class UserPostDto : PostDto<User>, IHaveLogin, IHaveNames
 {
     public string Username { get; set; } = "";
     public string Password { get; set; } = ""; // for debug
